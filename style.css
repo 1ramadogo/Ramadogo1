@@ -1,0 +1,299 @@
+:root {
+    --bg-dark: #050505;
+    --card-bg: #121212;
+    --accent: #ffcc00; /* Gold kwa ajili ya RAMA */
+    --text-white: #ffffff;
+    --text-dim: #a0a0a0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+body { background: var(--bg-dark); color: var(--text-white); }
+
+/* Navbar Mpya - Logo Juu */
+nav {
+    display: flex;
+    flex-direction: column; /* Inaleta logo juu na menu chini */
+    align-items: center;
+    padding: 20px 0;
+    background: rgba(0,0,0,0.95);
+    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 15px; /* Nafasi kati ya logo na menu */
+}
+
+.logo span { color: var(--accent); } /* RAMA inakuwa Gold */
+.logo-white { color: white; } /* DOGO inakuwa White */
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+.nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--accent);
+}
+
+/* Grid System */
+.container { padding: 40px 8%; }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.3s;
+    border: 1px solid #1f1f1f;
+}
+
+.card:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+.card img { width: 100%; height: 300px; object-fit: cover; }
+
+.card-content { padding: 15px; }
+.card-content h3 { font-size: 17px; margin-bottom: 5px; }
+.card-content p { color: var(--text-dim); font-size: 13px; }
+
+footer { text-align: center; padding: 50px; color: var(--text-dim); font-size: 14px; }
+/* Search Bar Styling */
+.search-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 30px;
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    width: 400px; /* Upana wa search bar */
+    transition: 0.3s;
+}
+
+.search-container:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
+}
+
+.search-container input {
+    background: none;
+    border: none;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-container button {
+    background: none;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .search-container {
+        width: 85%;
+    }
+    .nav-links {
+        gap: 15px;
+        font-size: 12px;
+    }
+}
+/* Admin Page Styling */
+.admin-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid #333;
+}
+
+.admin-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.admin-form input, .admin-form select, .admin-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: white;
+    border-radius: 8px;
+    outline: none;
+}
+
+.admin-form input:focus {
+    border-color: var(--accent);
+}
+
+.admin-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--accent);
+    color: black;
+    border: none;
+    border-radius: 8px;
+    font-weight: 800;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.admin-btn:hover {
+    background: white;
+}
+/* Social Icons pembeni ya Logo */
+.header-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    color: var(--text-dim);
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: var(--accent);
+}
+
+/* Password Box */
+#admin-auth {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.auth-box {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid var(--accent);
+}
+/* Social Icons pembeni ya Logo */
+.header-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    color: var(--text-dim);
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: var(--accent);
+}
+
+/* Password Box */
+#admin-auth {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.auth-box {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid var(--accent);
+}
+/* Hakikisha admin-content imejificha mwanzoni */
+#admin-content {
+    display: none;
+}
+
+/* Box la login likae katikati ya kioo */
+#admin-auth {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #050505;
+    display: flex; /* Hii inaleta box katikati */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Inakaa juu ya kila kitu */
+}
+
+.auth-box {
+    background: #121212;
+    padding: 40px;
+    border-radius: 15px;
+    border: 2px solid var(--accent);
+    text-align: center;
+    width: 350px;
+}
+/* Inafanya video ijaze kioo vizuri ikicheza */
+video:fullscreen {
+    object-fit: contain;
+    background-color: black;
+}
+
+video:-webkit-full-screen {
+    object-fit: contain;
+    background-color: black;
+}

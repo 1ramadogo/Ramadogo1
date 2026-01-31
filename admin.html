@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RamaDogo | Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><span>RAMA</span><span class="logo-white">DOGO</span></div>
+        
+        <div class="search-row">
+            <div class="search-container">
+                <input type="text" id="main-search" placeholder="Tafuta hapa...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a href="islamic.html">Islamic</a></li>
+            <li><a href="admin.html" class="active">Admin</a></li>
+        </ul>
+    </nav>
+
+   <div class="admin-container">
+    <h2 style="text-align: center; color: var(--accent); margin-bottom: 20px;">PAKIA MAUDHUI MPYA</h2>
+    <form class="admin-form" id="upload-form">
+        <label>Jina la Maudhui</label>
+        <input type="text" id="title" placeholder="Mfano: Wimbo Mpya au Movie" required>
+
+        <label>Aina ya Media (Media Type)</label>
+        <select id="media-type" style="width: 100%; padding: 12px; background: #000; color: white; border: 1px solid #333; margin-bottom: 15px;">
+            <option value="image">Picha Tu (Movies)</option>
+            <option value="video">Video (MP4)</option>
+            <option value="audio">Sauti/Audio (MP3)</option>
+        </select>
+
+        <label>Category</label>
+        <select id="category">
+            <option value="movies">Movies</option>
+            <option value="videos">Videos</option>
+            <option value="islamic">Islamic</option>
+        </select>
+
+        <label>URL ya Picha (Poster/Cover)</label>
+        <input type="url" id="image-url" placeholder="https://mfano.com/picha.jpg" required>
+
+        <label id="media-link-label">URL ya Video au Audio (Acha wazi kama ni Picha tu)</label>
+        <input type="url" id="media-url" placeholder="https://mfano.com/file.mp4 au .mp3">
+
+        <label>Maelezo</label>
+        <textarea id="desc" rows="3" placeholder="Maelezo kidogo..."></textarea>
+
+        <button type="submit" class="admin-btn">Pakia Sasa</button>
+    </form>
+</div>
+
+            <div id="admin-auth">
+    <div class="auth-box">
+        <h2 style="color: var(--accent); margin-bottom: 20px;">RAMADOGO ADMIN</h2>
+        <input type="password" id="admin-pass" placeholder="Ingiza Password..." 
+               style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #333; background: #000; color: white;">
+        <button onclick="checkPass()" class="admin-btn">Fungua Paneli</button>
+    </div>
+</div>
+<div class="admin-container" style="margin-top: 30px; border-color: #444;">
+    <h3 style="color: var(--accent); margin-bottom: 15px;">BADILI PASSWORD YA ADMIN</h3>
+    <div class="admin-form">
+        <label>Password Mpya</label>
+        <input type="password" id="new-admin-pass" placeholder="Ingiza password mpya...">
+        <button onclick="changeAdminPassword()" class="admin-btn" style="background: #555; color: white;">Hifadhi Password</button>
+    </div>
+</div>
+<div style="display: flex; justify-content: flex-end; padding: 10px 5%;">
+    <button onclick="logoutAdmin()" class="admin-btn" style="width: auto; background: #ff4444; padding: 10px 20px;">
+        <i class="fas fa-sign-out-alt"></i> Logout
+    </button>
+</div>
+<div class="grid" id="stats-dashboard" style="margin-bottom: 30px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+    <div class="card" style="padding: 20px; text-align: center; border-color: var(--accent);">
+        <h4 style="color: var(--text-dim);">Movies</h4>
+        <h2 id="count-movies" style="color: var(--accent);">0</h2>
+    </div>
+    <div class="card" style="padding: 20px; text-align: center; border-color: var(--accent);">
+        <h4 style="color: var(--text-dim);">Videos</h4>
+        <h2 id="count-videos" style="color: var(--accent);">0</h2>
+    </div>
+    <div class="card" style="padding: 20px; text-align: center; border-color: var(--accent);">
+        <h4 style="color: var(--text-dim);">Islamic</h4>
+        <h2 id="count-islamic" style="color: var(--accent);">0</h2>
+    </div>
+</div>
+<div id="edit-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:3000; justify-content:center; align-items:center;">
+    <div class="admin-container" style="width: 90%; max-width: 500px;">
+        <h3 style="color:var(--accent); margin-bottom:15px;">HARIRI MAUDHUI</h3>
+        <input type="hidden" id="edit-id">
+        <label>Jina</label>
+        <input type="text" id="edit-title" style="width:100%; margin-bottom:10px;">
+        <label>Maelezo</label>
+        <textarea id="edit-desc" rows="3" style="width:100%; background:#1a1a1a; color:white; border:1px solid #333; border-radius:8px; padding:10px; margin-bottom:10px;"></textarea>
+        <div style="display:flex; gap:10px;">
+            <button onclick="saveEdit()" class="admin-btn">Hifadhi</button>
+            <button onclick="closeEdit()" class="admin-btn" style="background:#555;">Ghairi</button>
+        </div>
+    </div>
+</div>
+
+<div id="admin-content">
+    <nav>
+        </nav>
+    <main class="container">
+        </main>
+<div class="admin-container" style="margin-top: 30px; border-color: var(--accent);">
+    <h3 style="color: var(--accent); margin-bottom: 15px;">WAFUASI WALIOJIUNGA (SUBSCRIBERS)</h3>
+    <div id="subscribers-list" style="background: #111; padding: 15px; border-radius: 8px; max-height: 200px; overflow-y: auto;">
+        </div>
+    <button onclick="copySubscribers()" class="admin-btn" style="margin-top: 10px; background: #444;">
+        <i class="fas fa-copy"></i> Copy Email Zote
+    </button>
+</div>
+<div id="admin-analytics" class="admin-container" style="margin-bottom: 30px; border-color: var(--accent);">
+    <h3 style="color: var(--accent); margin-bottom: 20px; text-align: center;"> <i class="fas fa-chart-line"></i> ANALYTICS ZA TOVUTI</h3>
+    <div class="card" style="margin-top: 20px; padding: 20px; background: #111; border: 1px solid #333;">
+    <h4 style="color: var(--accent); margin-bottom: 15px; text-align: center;">Mwenendo wa Maudhui kwa Mwezi</h4>
+    <canvas id="contentChart" style="width: 100%; max-height: 250px;"></canvas>
+</div>
+
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px;">
+        <div class="card" style="padding: 15px; text-align: center; background: #111;">
+            <p style="font-size: 12px; color: var(--text-dim);">Jumla ya Movies</p>
+            <h2 id="stat-movies" style="color: var(--accent);">0</h2>
+        </div>
+        <div class="card" style="padding: 15px; text-align: center; background: #111;">
+            <p style="font-size: 12px; color: var(--text-dim);">Jumla ya Videos</p>
+            <h2 id="stat-videos" style="color: var(--accent);">0</h2>
+        </div>
+        <div class="card" style="padding: 15px; text-align: center; background: #111;">
+            <p style="font-size: 12px; color: var(--text-dim);">Islamic Content</p>
+            <h2 id="stat-islamic" style="color: var(--accent);">0</h2>
+        </div>
+        <div class="card" style="padding: 15px; text-align: center; background: var(--accent); color: black;">
+            <p style="font-size: 12px; font-weight: bold;">Subscribers</p>
+            <h2 id="stat-subs">0</h2>
+        </div>
+    </div>
+</div>
+
+    <footer>
+        <p>&copy; 2026 <strong>RAMADOGO</strong>. Admin Panel.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
